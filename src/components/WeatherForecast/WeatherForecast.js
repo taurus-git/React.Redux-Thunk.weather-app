@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { fetchWeather } from "../../actions/fetchWeather";
-import { getLoading, getWeather } from "../../selectors/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchWeather } from "../../store/store";
 
 const WeatherForecast = () => {
-    const weather = useSelector( getWeather );
-    const isLoading = useSelector( getLoading );
     const dispatch = useDispatch();
+    const weather = useSelector( state => state.weather.data );
+    const isLoading = useSelector( state => state.weather.isLoading );
 
     useEffect( () => {
         dispatch( fetchWeather( 'London' ) );
@@ -20,7 +19,6 @@ const WeatherForecast = () => {
         <div>
             { isLoading ? <div>Loading...</div> : <div>WeatherForecast</div> }
         </div>
-
     );
 }
 

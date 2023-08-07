@@ -1,14 +1,10 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import weatherReducer from "../reducers/weatherReducer";
-import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
+import { weatherReducer } from './slice/weatherSlice';
 
-const rootReducer = combineReducers( {
-    weather: weatherReducer,
-} )
-
-const store = configureStore( {
-    reducer: rootReducer,
-    middleware: ( getDefaultMiddleware ) => getDefaultMiddleware().concat( thunk ),
+export const store = configureStore( {
+    reducer: {
+        weather: weatherReducer
+    }
 } );
 
-export default store;
+export * from './thunks/fetchWeather';
